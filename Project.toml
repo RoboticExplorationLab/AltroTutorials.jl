@@ -18,3 +18,9 @@ Rotations = "6038ab10-8711-5258-84ad-4b1120ba62dc"
 StaticArrays = "90137ffa-7385-5640-81b9-e52037218182"
 TrajOptPlots = "7770976a-8dee-4930-bf39-a1782fd21ce6"
 TrajectoryOptimization = "c79d492b-0548-5874-b488-5a62c1d9d0ca"
+
+[compat]
+RobotZoo = "0.2"
+RobotDynamics = "0.3.4"
+TrajectoryOptimization = "0.5"
+Altro = "0.4"
