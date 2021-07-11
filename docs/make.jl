@@ -15,4 +15,5 @@ makedocs(
 # for more information.
 deploydocs(
     repo = "github.com/RoboticExplorationLab/AltroTutorials.jl.git",
+    devbranch = "main"
 )
