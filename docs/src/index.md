@@ -39,55 +39,61 @@ means that the states and controls at any timestep are only coupled to those at 
 time steps. This property imparts a unique banded structure to the underlying system 
 of equations. Leveraging this problem structure is key to good performance. 
 
+
 ## Ecosystem Overview
 Altro.jl is one package in a suite of packages developed by the Robotic Exploration Lab
 at Stanford and Carnegie Mellon Universities aimed at pushing the computational and 
 algorithmic limits of optimal control. The packages are summarized below.
 
+### Key Features
+The TrajectoryOptimization.jl ecosystem is designed primarily to faciliate the development of novel algorithms for optimal control. While it has been successfully deployed on real robots, it's strength lies in it's extensibility and easy of use. The following are key features / design objectives of the ecosystem:
+* Provide an easy, intuitive API for setting up, solving, and analyzing trajectory optimization problems.
+* Solve generic single-stage nonlinear trajectory optimization problems with generic nonlinear equality, inequality, or second-order cone constraints.
+* Accurately account for the group structure of 3D rotations.
+* Provide convient methods for evaluating derivative information via automatic differentiation or finite differencing.
+* Easy installation and use with other optimization packages.
+* Deliver exceptional single-threaded performance on standard desktop computers.
+* Allow for extensions and modifications by partners in both academia and industry.
+
 ### Core Packages
 
-* RobotDynamics.jl: Provides methods for describing controlled dynamical systems, with 
-an emphasis on single rigid bodies. It provides a common Julia interface for querying 
-system dynamics and derivatives. Derivatives can be obtained using either automatic 
-differentiation or finite differencing.
+* RobotDynamics.jl: Provides methods for describing controlled dynamical systems, with an emphasis on single rigid bodies. It provides a common Julia interface for querying system dynamics and derivatives. Derivatives can be obtained using either automatic differentiation or finite differencing.
 
-* TrajectoryOptimization.jl: A convenient API for describing trajectory optimization 
-problems. It also provides functionality for evaluating costs, constraints, and their 
-derivatives. This interface is intended to be utilized by trajectory optimization solvers 
-such as Altro.jl.
+* TrajectoryOptimization.jl: A convenient API for describing trajectory optimization problems. It also provides functionality for evaluating costs, constraints, and their derivatives. This interface is intended to be utilized by trajectory optimization solvers such as Altro.jl.
 
-* Altro.jl: A state-of-the-art trajectory optimization solver that uses augmented Lagrangian
-and iterative LQR (iLQR) to solve general nonlinear, constrained trajectory optimization 
-problems. It accepts problems described using TrajectoryOptimization problems.
+* Altro.jl: A state-of-the-art trajectory optimization solver that uses augmented Lagrangian and iterative LQR (iLQR) to solve general nonlinear, constrained trajectory optimization problems. It accepts problems described using TrajectoryOptimization problems.
 
 ### Related Packages
 
-* RobotZoo.jl: A set of canonical mathematical models for nonlinear systems, implemented 
-within the RobotDynamics interface.
+* RobotZoo.jl: A set of canonical mathematical models for nonlinear systems, implemented within the RobotDynamics interface.
 
-* TrajOptPlots.jl: Provides visualization utilities for TrajectoryOptimization.jl, including
-3D visualization via MeshCat.jl.
+* TrajOptPlots.jl: Provides visualization utilities for TrajectoryOptimization.jl, including 3D visualization via MeshCat.jl.
 
+### Future Directions
+The TrajectoryOptimization.jl ecosystem is still under active development and will be continually updated with more algorithms and solvers. Some currently active areas of development include:
+* The development of a C++ version of the core ALTRO algorithm, which will provide a C interface to be called from Julia or other high-level languages.
+* Integration with multi-body dynamics packages.
+* Provide easy definition of trajectory optimization problems involving switched or hybrid systems.
 
 ## Installation
 It is very easy to install the TrajectoryOptimization.jl ecosystem using Julia's built-in package manager. 
 
-1. First, you need to install Julia on your computer.   
-Go to the Julia [Downloads page](https://julialang.org/downloads/) and download the latest binaries for your operating system. The installation is very straight-forward, but for more specific guidance, see [this page on the Julia website](https://julialang.org/downloads/platform/). 
-2. Open a Julia REPL  
-Once the `julia` binary is on your system path, you can open the REPL by invoking this binary, e.g. 
+1. **Install Julia:**  Go to the Julia [Downloads page](https://julialang.org/downloads/) and download the latest binaries for your operating system. The installation is very straight-forward, but for more specific guidance, see [this page on the Julia website](https://julialang.org/downloads/platform/). 
+
+2. **Open a Julia REPL:** Once the `julia` binary is on your system path, you can open the REPL by invoking this binary, e.g. 
 
        > julia
-3. Enter the package manager using the `]` key. It should look like the following:
+
+3. **Open the Julia Package Manager:** Enter the package manager using the `]` key. It should look like the following:
     ![](../img/julia_pkg.png)
-4. Install the packages  
-Install the desired packages using the `add` command in the package manager:
+
+4. **Install the packages:**  Install the desired packages using the `add` command in the package manager:
 
         (@v1.6) pkg> add Altro
         (@v1.6) pkg> add TrajectoryOptimization
         (@v1.6) pkg> add RobotDynamics 
 
-    Some other useful packages you may want to install:
+5. **Install Extra Packages:** Some other useful packages you may want to install:
 
         (@v1.6) pkg> add RobotZoo
         (@v1.6) pkg> add TrajOptPlots 
@@ -97,6 +103,7 @@ Install the desired packages using the `add` command in the package manager:
         (@v1.6) pkg> add BenchmarkTools 
         (@v1.6) pkg> add Rotations 
 
+!!! note 
     Since Julia `v1.6` the installation process will also precompile these packages for you to decrease the time it takes to load the packages at run-time. Note that when installing `Altro` it also installs `TrajectoryOptimization` and `RobotDynamics` on your system, since these are dependencies. However, you cannot directly use these packages (e.g. `using RobotDynamics`) until you have specifically added them to your environment. For more information on the package manager, as well as working with environments, see the [documentation](https://pkgdocs.julialang.org/v1/).
         
 
