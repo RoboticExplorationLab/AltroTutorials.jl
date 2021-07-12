@@ -67,3 +67,38 @@ within the RobotDynamics interface.
 
 * TrajOptPlots.jl: Provides visualization utilities for TrajectoryOptimization.jl, including
 3D visualization via MeshCat.jl.
+
+
+## Installation
+It is very easy to install the TrajectoryOptimization.jl ecosystem using Julia's built-in package manager. 
+
+1. First, you need to install Julia on your computer.   
+Go to the Julia [Downloads page](https://julialang.org/downloads/) and download the latest binaries for your operating system. The installation is very straight-forward, but for more specific guidance, see [this page on the Julia website](https://julialang.org/downloads/platform/). 
+2. Open a Julia REPL  
+Once the `julia` binary is on your system path, you can open the REPL by invoking this binary, e.g. 
+
+       > julia
+3. Enter the package manager using the `]` key. It should look like the following:
+    ![](../img/julia_pkg.png)
+4. Install the packages  
+Install the desired packages using the `add` command in the package manager:
+
+        (@v1.6) pkg> add Altro
+        (@v1.6) pkg> add TrajectoryOptimization
+        (@v1.6) pkg> add RobotDynamics 
+
+    Some other useful packages you may want to install:
+
+        (@v1.6) pkg> add RobotZoo
+        (@v1.6) pkg> add TrajOptPlots 
+        (@v1.6) pkg> add MeshCat 
+        (@v1.6) pkg> add StaticArrays 
+        (@v1.6) pkg> add Plots 
+        (@v1.6) pkg> add BenchmarkTools 
+        (@v1.6) pkg> add Rotations 
+
+    Since Julia `v1.6` the installation process will also precompile these packages for you to decrease the time it takes to load the packages at run-time. Note that when installing `Altro` it also installs `TrajectoryOptimization` and `RobotDynamics` on your system, since these are dependencies. However, you cannot directly use these packages (e.g. `using RobotDynamics`) until you have specifically added them to your environment. For more information on the package manager, as well as working with environments, see the [documentation](https://pkgdocs.julialang.org/v1/).
+        
+
+### Why Julia?
+Julia is a high-performance language specifically designed for scientific computing. Given it's convenient syntax, excellent package manager, and wealth of high-quality packages for scientific computing, we have found it to be an excellent language for developing novel optimization algorithms. Since the focus of the TrajectoryOptimization.jl ecosystem is primarily the research and development of novel algorithms rather than the development of a production-ready software stack, the JIT (just-in-time compilation) overhead and other minor inconvenciences of working with a high-level scripted language like Julia are minor compared to the benefits. 
